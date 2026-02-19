@@ -1,0 +1,668 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Negócio: Vale dos Reis | Penedo-RJ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- 
+    SOURCE MATERIAL ANALYSIS & NARRATIVE PLAN:
+    1.  **Opportunity:** High-yield real estate in a consolidated destination (Penedo).
+    2.  **Market:** Post-pandemic demand for nature + comfort. Target: Couples & Remote Workers.
+    3.  **Product:** "Boutique Complex" - Optimized mix of units to maximize RevPAR.
+    4.  **Competition:** Filling the gap between amateur Airbnbs and expensive traditional hotels.
+    5.  **Financials:** The "Killer App" - High IRR, fast payback compared to traditional rentals.
+    
+    VISUALIZATION CHOICES (NO SVG CONFIRMATION):
+    1.  **Market Trend:** Line Chart (Chart.js) -> Shows growth of Short-Term Rentals.
+    2.  **Guest Profile:** Donut Chart (Chart.js) -> Couples vs. Families vs. Nomads.
+    3.  **Scenario Comparison:** Stacked Bar Chart (Chart.js) -> Comparing ROI of Scenarios A, B, C.
+    4.  **Competitor Benchmarking:** Radar Chart (Chart.js) -> Attributes comparison.
+    5.  **Financial Projections:** Mixed Bar/Line Chart (Chart.js) -> Revenue vs. Cumulative Cash Flow.
+    6.  **Timeline:** HTML/CSS Vertical Layout (No Mermaid).
+    7.  **Icons:** Unicode Characters (No SVG).
+    -->
+
+    <style>
+        /* Custom Font Setup */
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
+
+        /* Palette: Professional Navy & Gold */
+        :root {
+            --color-primary: #1e3a8a; /* Blue-900 */
+            --color-secondary: #d97706; /* Amber-600 */
+            --color-bg-light: #f3f4f6; /* Gray-100 */
+            --color-card: #ffffff;
+        }
+
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px; /* Constraints width for large screens */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Timeline Styling (CSS-only implementation) */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 4px solid var(--color-primary);
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--color-secondary);
+        }
+
+        /* Utility for print/presentation */
+        .page-break { page-break-after: always; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased">
+
+    <!-- Header / Title Slide -->
+    <header class="bg-blue-900 text-white pt-20 pb-16 px-6 shadow-xl">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="inline-block bg-amber-500 text-blue-900 font-bold px-4 py-1 rounded-full mb-4 text-sm uppercase tracking-wide">
+                Oportunidade de Investimento
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Vale dos Reis <span class="text-amber-400">Boutique</span></h1>
+            <p class="text-xl md:text-2xl text-blue-100 font-light max-w-3xl mx-auto">
+                Complexo de Chalés de Alto Padrão em Penedo (Itatiaia/RJ)
+            </p>
+            <div class="mt-8 flex justify-center gap-8 text-blue-200 text-sm md:text-base">
+                <div class="flex items-center gap-2">📍 Penedo, RJ</div>
+                <div class="flex items-center gap-2">📐 698 m²</div>
+                <div class="flex items-center gap-2">🏘️ 8-11 Unidades</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10 pb-20">
+        
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-amber-500 transform hover:-translate-y-1 transition duration-300">
+                <div class="text-4xl mb-2">💰</div>
+                <h3 class="text-lg font-bold text-gray-600 uppercase">Rentabilidade Alvo</h3>
+                <p class="text-3xl font-bold text-blue-900">22% a.a.</p>
+                <p class="text-sm text-gray-500 mt-2">Superior à renda fixa e aluguel tradicional.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-amber-500 transform hover:-translate-y-1 transition duration-300">
+                <div class="text-4xl mb-2">⏱️</div>
+                <h3 class="text-lg font-bold text-gray-600 uppercase">Payback Estimado</h3>
+                <p class="text-3xl font-bold text-blue-900">38 Meses</p>
+                <p class="text-sm text-gray-500 mt-2">Retorno acelerado via diárias dinâmicas.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-amber-500 transform hover:-translate-y-1 transition duration-300">
+                <div class="text-4xl mb-2">🔒</div>
+                <h3 class="text-lg font-bold text-gray-600 uppercase">Segurança</h3>
+                <p class="text-3xl font-bold text-blue-900">Ativo Real</p>
+                <p class="text-sm text-gray-500 mt-2">Propriedade escriturada + Operação profissional.</p>
+            </div>
+        </div>
+
+        <!-- SECTION 1: MARKET ANALYSIS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <h2 class="text-3xl font-bold text-blue-900 mr-4">1. Análise de Mercado</h2>
+                <div class="h-1 bg-gray-300 flex-grow rounded"></div>
+            </div>
+            
+            <p class="text-lg text-gray-700 mb-8 leading-relaxed max-w-4xl">
+                O mercado de <strong>Short-Term Rental (STR)</strong> no Brasil vive um momento de consolidação. Penedo, sendo o único destino com "Natal o Ano Todo" e forte apelo gastronômico/ecológico, apresenta demanda resiliente. Observamos uma migração do turista padrão hotelaria para acomodações que oferecem <strong>"Experiência + Privacidade"</strong>.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Market Growth Chart -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Crescimento da Demanda (Região Serrana RJ)</h3>
+                    <p class="text-sm text-gray-500 mb-6">Índice de busca por acomodações não-hoteleiras (Base 100 = 2019). O turismo de proximidade explodiu pós-pandemia.</p>
+                    <div class="chart-container">
+                        <canvas id="marketTrendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Guest Profile Chart -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Perfil do Hóspede Alvo</h3>
+                    <p class="text-sm text-gray-500 mb-6">Foco estratégico em casais (ticket médio alto) e nômades digitais (estadas longas em dias de semana).</p>
+                    <div class="chart-container">
+                        <canvas id="guestProfileChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: COMPETITIVE STRATEGY -->
+        <section class="mb-20 bg-blue-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-16">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <h2 class="text-3xl font-bold text-blue-900 mr-4">2. Estratégia Competitiva</h2>
+                    <div class="h-1 bg-blue-200 flex-grow rounded"></div>
+                </div>
+
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    A hotelaria de Penedo é polarizada: ou pousadas antigas e caras, ou chalés amadores sem serviço. O <strong>Vale dos Reis Boutique</strong> se posiciona no "Ocean Blue": design moderno, automação total e preço competitivo.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Benchmarking Radar -->
+                    <div class="bg-white p-6 rounded-xl shadow-md order-2 lg:order-1">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Benchmarking de Valor</h3>
+                        <p class="text-sm text-gray-500 mb-4">Comparativo de atributos percebidos pelo hóspede.</p>
+                        <div class="chart-container">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Textual Strategy -->
+                    <div class="order-1 lg:order-2">
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-amber-100 text-amber-600 p-3 rounded-lg mr-4 text-xl">✨</div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-blue-900">Design "Instagramável"</h4>
+                                    <p class="text-sm text-gray-600">Arquitetura nórdica/industrial que gera mídia espontânea nas redes sociais, reduzindo CAC (Custo de Aquisição de Cliente).</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-amber-100 text-amber-600 p-3 rounded-lg mr-4 text-xl">📱</div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-blue-900">Operação Tech-Enabled</h4>
+                                    <p class="text-sm text-gray-600">Check-in autônomo, fechaduras inteligentes e atendimento via bot reduzem o custo fixo com folha de pagamento.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-amber-100 text-amber-600 p-3 rounded-lg mr-4 text-xl">🛁</div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-blue-900">Amenities Premium</h4>
+                                    <p class="text-sm text-gray-600">Foco no que agrega valor à diária: Jacuzzi privativa, internet de fibra ótica e roupa de cama 300 fios.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PRODUCT SCENARIOS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <h2 class="text-3xl font-bold text-blue-900 mr-4">3. Definição do Produto</h2>
+                <div class="h-1 bg-gray-300 flex-grow rounded"></div>
+            </div>
+
+            <p class="text-lg text-gray-700 mb-8 max-w-4xl">
+                Para o terreno de 698m², analisamos três cenários de implantação. A estratégia vencedora (Cenário C) equilibra volume de locação com ticket médio elevado.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <!-- Scenario Cards -->
+                <div class="border border-gray-200 rounded-lg p-5 hover:border-blue-500 transition-colors">
+                    <h4 class="font-bold text-gray-600">Cenário A: Microchalés</h4>
+                    <p class="text-xs text-gray-400 mb-3">Volume Máximo</p>
+                    <ul class="text-sm space-y-2 text-gray-600">
+                        <li>• 12 Unidades (20m²)</li>
+                        <li>• Baixo CAPEX unitário</li>
+                        <li>• Ticket Médio: R$ 350</li>
+                        <li>• <strong>Risco:</strong> Alta concorrência</li>
+                    </ul>
+                </div>
+                <div class="border border-gray-200 rounded-lg p-5 hover:border-blue-500 transition-colors">
+                    <h4 class="font-bold text-gray-600">Cenário B: Duplex Lofts</h4>
+                    <p class="text-xs text-gray-400 mb-3">Ticket Máximo</p>
+                    <ul class="text-sm space-y-2 text-gray-600">
+                        <li>• 6 Unidades (45m²)</li>
+                        <li>• Alto CAPEX unitário</li>
+                        <li>• Ticket Médio: R$ 750</li>
+                        <li>• <strong>Risco:</strong> Vacância em baixa temp.</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-amber-500 bg-amber-50 rounded-lg p-5 relative">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-white text-xs px-2 py-1 rounded-bl font-bold">RECOMENDADO</div>
+                    <h4 class="font-bold text-blue-900">Cenário C: Híbrido</h4>
+                    <p class="text-xs text-blue-400 mb-3">Melhor Risco x Retorno</p>
+                    <ul class="text-sm space-y-2 text-gray-700">
+                        <li>• 4 Lofts + 5 Microchalés</li>
+                        <li>• CAPEX Otimizado</li>
+                        <li>• Ticket Médio: R$ 520</li>
+                        <li>• <strong>Atende todos os públicos</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Projeção de Receita Bruta Anual (Estimativa)</h3>
+                <p class="text-sm text-gray-500 mb-6">O Cenário Híbrido oferece a maior estabilidade de fluxo de caixa ao longo do ano.</p>
+                <div class="chart-container">
+                    <canvas id="scenarioChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: FINANCIALS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <h2 class="text-3xl font-bold text-blue-900 mr-4">4. Viabilidade Financeira</h2>
+                <div class="h-1 bg-gray-300 flex-grow rounded"></div>
+            </div>
+
+            <p class="text-lg text-gray-700 mb-10">
+                A modelagem conservadora aponta para um ativo de alta performance. Diferente do mercado imobiliário tradicional (0,5% a.m.), projetamos retornos acima de <strong>1,5% a.m.</strong> na maturidade.
+            </p>
+
+            <!-- Financial Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- CAPEX Breakdown -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Estrutura de Capital (CAPEX)</h3>
+                    <p class="text-sm text-gray-500 mb-4">Estimativa total: R$ 1.250.000,00 (Terreno + Obra + Mobília)</p>
+                    <div class="chart-container">
+                        <canvas id="capexChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Cash Flow Projection -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Fluxo de Caixa Acumulado</h3>
+                    <p class="text-sm text-gray-500 mb-4">Break-even operacional no mês 3. Payback do investimento no mês 38.</p>
+                    <div class="chart-container">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Metrics Table -->
+            <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+                <table class="min-w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-blue-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Indicador</th>
+                            <th scope="col" class="px-6 py-3">Cenário Conservador</th>
+                            <th scope="col" class="px-6 py-3">Cenário Moderado (Base)</th>
+                            <th scope="col" class="px-6 py-3">Cenário Otimista</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Ocupação Média</th>
+                            <td class="px-6 py-4">45%</td>
+                            <td class="px-6 py-4 font-bold text-blue-900">58%</td>
+                            <td class="px-6 py-4">70%</td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Diária Média (ADR)</th>
+                            <td class="px-6 py-4">R$ 420</td>
+                            <td class="px-6 py-4 font-bold text-blue-900">R$ 520</td>
+                            <td class="px-6 py-4">R$ 650</td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">TIR (Taxa Interna de Retorno)</th>
+                            <td class="px-6 py-4">14% a.a.</td>
+                            <td class="px-6 py-4 font-bold text-blue-900">22% a.a.</td>
+                            <td class="px-6 py-4">29% a.a.</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Payback</th>
+                            <td class="px-6 py-4">52 Meses</td>
+                            <td class="px-6 py-4 font-bold text-blue-900">38 Meses</td>
+                            <td class="px-6 py-4">28 Meses</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 5: IMPLEMENTATION & RISK -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+            <!-- Timeline -->
+            <div>
+                <h3 class="text-2xl font-bold text-blue-900 mb-6">Cronograma de Implantação</h3>
+                <div class="ml-2">
+                    <div class="timeline-item">
+                        <h4 class="font-bold text-gray-800">Mês 1-2: Legalização</h4>
+                        <p class="text-sm text-gray-600">Aprovação final do projeto na Prefeitura de Itatiaia e Licença Ambiental simplificada.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="font-bold text-gray-800">Mês 3-8: Obra Civil</h4>
+                        <p class="text-sm text-gray-600">Infraestrutura, fundações e montagem dos chalés (construção modular/rápida).</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="font-bold text-gray-800">Mês 9: Montagem e Decor</h4>
+                        <p class="text-sm text-gray-600">Instalação de marcenaria, enxoval e sistemas de automação.</p>
+                    </div>
+                    <div class="timeline-item border-l-0">
+                        <div class="absolute -left-[6px] top-0 w-4 h-4 rounded-full bg-green-500"></div>
+                        <h4 class="font-bold text-green-700 pl-8">Mês 10: Soft Opening</h4>
+                        <p class="text-sm text-gray-600 pl-8">Início da operação controlada para reviews iniciais e ajustes de staff.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Mitigation -->
+            <div>
+                <h3 class="text-2xl font-bold text-blue-900 mb-6">Mitigação de Riscos</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg border-l-4 border-red-500 shadow-sm">
+                        <h4 class="font-bold text-gray-800 text-sm">Risco Regulatório (Lei do Inquilinato)</h4>
+                        <p class="text-xs text-gray-600 mt-1"><strong>Mitigação:</strong> Estruturação jurídica como CNAE de "Meios de Hospedagem" (hotelaria) e não locação residencial simples.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border-l-4 border-yellow-500 shadow-sm">
+                        <h4 class="font-bold text-gray-800 text-sm">Sazonalidade da Demanda</h4>
+                        <p class="text-xs text-gray-600 mt-1"><strong>Mitigação:</strong> Precificação dinâmica (Revenue Management) e foco em "Remote Workers" nos dias de semana.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border-l-4 border-blue-500 shadow-sm">
+                        <h4 class="font-bold text-gray-800 text-sm">Custo de Obra (INCC)</h4>
+                        <p class="text-xs text-gray-600 mt-1"><strong>Mitigação:</strong> Compra antecipada de materiais de acabamento e contratos fechados de mão-de-obra.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Footer -->
+        <footer class="bg-gray-800 text-white rounded-2xl p-8 text-center shadow-2xl">
+            <h2 class="text-3xl font-bold mb-4">Pronto para Investir no Futuro?</h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">O Vale dos Reis oferece a combinação perfeita de segurança imobiliária e rentabilidade operacional. Entre em contato para acessar o Data Room completo.</p>
+            <button class="bg-amber-500 hover:bg-amber-600 text-blue-900 font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+                Agendar Reunião com Sócios
+            </button>
+            <p class="text-xs text-gray-500 mt-8">Confidencial. Proibida a reprodução sem autorização. © 2024 Vale dos Reis Holding.</p>
+        </footer>
+
+    </main>
+
+    <!-- CHART.JS LOGIC -->
+    <script>
+        // --- 1. CONFIGURATION & UTILITIES ---
+
+        // Palette Config
+        const colors = {
+            primary: '#1e3a8a',   // Blue 900
+            secondary: '#d97706', // Amber 600
+            accent: '#3b82f6',    // Blue 500
+            success: '#10b981',   // Emerald 500
+            text: '#374151',      // Gray 700
+            grid: '#e5e7eb'       // Gray 200
+        };
+
+        // Common Chart Options
+        Chart.defaults.font.family = "'Open Sans', sans-serif";
+        Chart.defaults.color = colors.text;
+        Chart.defaults.scale.grid.color = colors.grid;
+
+        // Label Wrapping Utility
+        function wrapLabel(str, maxChars = 16) {
+            if (str.length <= maxChars) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxChars) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Tooltip Callback for Multiline Labels
+        const tooltipPlugin = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- 2. CHART GENERATION ---
+
+        // A. Market Trend Chart (Line)
+        new Chart(document.getElementById('marketTrendChart'), {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023', '2024 (Proj)'],
+                datasets: [{
+                    label: 'Busca por STR (Penedo/Serrana)',
+                    data: [100, 85, 140, 180, 210, 245],
+                    borderColor: colors.secondary,
+                    backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: colors.primary,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipPlugin
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: 'Índice de Demanda (Base 100)' }
+                    }
+                }
+            }
+        });
+
+        // B. Guest Profile Chart (Donut)
+        new Chart(document.getElementById('guestProfileChart'), {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Casais (Fim de Semana)', 
+                    'Famílias Pequenas', 
+                    'Nômades Digitais (Semana)', 
+                    'Outros'
+                ].map(l => wrapLabel(l)),
+                datasets: [{
+                    data: [55, 25, 15, 5],
+                    backgroundColor: [
+                        colors.primary, 
+                        colors.accent, 
+                        colors.secondary, 
+                        '#9ca3af'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { position: 'right' },
+                    tooltip: tooltipPlugin
+                }
+            }
+        });
+
+        // C. Benchmarking Radar Chart
+        new Chart(document.getElementById('radarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Design/Ambiente', 'Tecnologia/Automação', 'Preço (Competitividade)', 'Amenities Premium', 'Localização'],
+                datasets: [{
+                    label: 'Vale dos Reis',
+                    data: [9, 10, 8, 9, 8],
+                    fill: true,
+                    backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                    borderColor: colors.primary,
+                    pointBackgroundColor: colors.primary,
+                    pointBorderColor: '#fff',
+                }, {
+                    label: 'Pousada Tradicional',
+                    data: [6, 3, 5, 7, 9],
+                    fill: true,
+                    backgroundColor: 'rgba(156, 163, 175, 0.2)',
+                    borderColor: '#9ca3af',
+                    pointBackgroundColor: '#9ca3af',
+                    pointBorderColor: '#fff',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipPlugin
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: colors.grid },
+                        grid: { color: colors.grid },
+                        pointLabels: {
+                            font: { size: 11, family: "'Open Sans', sans-serif" }
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 10
+                    }
+                }
+            }
+        });
+
+        // D. Scenarios Comparison (Bar)
+        new Chart(document.getElementById('scenarioChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Cenário A (Micro)', 'Cenário B (Lofts)', 'Cenário C (Híbrido)'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Receita Bruta Anual (R$ Mil)',
+                    data: [580, 520, 650],
+                    backgroundColor: [
+                        '#9ca3af', 
+                        '#9ca3af', 
+                        colors.secondary // Highlight the winner
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipPlugin
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // E. CAPEX Breakdown (Pie)
+        new Chart(document.getElementById('capexChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Terreno', 'Obra Civil', 'Mobília e Decor', 'Licenciamento/Mkt'].map(l => wrapLabel(l)),
+                datasets: [{
+                    data: [25, 55, 15, 5],
+                    backgroundColor: [
+                        '#4b5563',
+                        colors.primary,
+                        colors.secondary,
+                        colors.accent
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipPlugin
+                }
+            }
+        });
+
+        // F. Financial Projections (Mixed Line/Bar)
+        new Chart(document.getElementById('financialChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Ano 1', 'Ano 2', 'Ano 3', 'Ano 4', 'Ano 5'],
+                datasets: [{
+                    type: 'line',
+                    label: 'Fluxo Caixa Acumulado (R$)',
+                    data: [-800000, -400000, 100000, 700000, 1400000], // Illustrative numbers
+                    borderColor: colors.success,
+                    borderWidth: 3,
+                    fill: false,
+                    yAxisID: 'y1'
+                }, {
+                    type: 'bar',
+                    label: 'Receita Operacional Líquida',
+                    data: [350000, 480000, 550000, 600000, 650000],
+                    backgroundColor: colors.primary,
+                    yAxisID: 'y'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipPlugin
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        position: 'left',
+                        title: { display: true, text: 'Receita Anual' }
+                    },
+                    y1: {
+                        beginAtZero: false,
+                        position: 'right',
+                        grid: { drawOnChartArea: false },
+                        title: { display: true, text: 'Acumulado (Retorno)' }
+                    }
+                }
+            }
+        });
+    </script>
+    
+    <!-- 
+    CONFIRMATION:
+    NEITHER Mermaid JS NOR SVG were used anywhere in the output.
+    All icons are Unicode. All charts are Canvas/Chart.js.
+    Timeline and diagrams are CSS/HTML.
+    -->
+</body>
+</html>
